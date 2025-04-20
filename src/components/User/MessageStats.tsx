@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { MessageWithResponse } from '../../services/messageService';
 
 interface MessageStatsProps {
@@ -6,6 +6,13 @@ interface MessageStatsProps {
 }
 
 const MessageStats: React.FC<MessageStatsProps> = ({ messages }) => {
+  const [stats, setStats] = useState<MessageStats>({
+    total: 0,
+    pending: 0,
+    resolved: 0,
+    inProgress: 0
+  });
+
   if (messages.length === 0) {
     return null;
   }

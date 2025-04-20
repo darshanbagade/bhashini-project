@@ -299,26 +299,22 @@ const UserDashboard: React.FC = () => {
   }, [currentUser]);
 
   // Determine message status text
-  const getStatusText = (status: string): string => {
+  const getStatusText = (status: string) => {
     switch (status) {
-      case 'pending': return 'Preparing...';
-      case 'sent': return 'Sending...';
-      case 'processed': return 'Waiting for response...';
-      case 'responded': return 'Responded';
-      case 'error': return 'Error processing';
-      default: return status;
+      case 'pending':
+        return 'Pending';
+      case 'in_progress':
+        return 'In Progress';
+      case 'resolved':
+        return 'Resolved';
+      default:
+        return status;
     }
   };
 
   // Format date for display
-  const formatDate = (date: Date): string => {
-    return date.toLocaleString('en-US', {
-      day: '2-digit',
-      month: 'short',
-      year: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
-    });
+  const formatDate = (date: Date) => {
+    return new Date(date).toLocaleDateString();
   };
 
   // Handle responses being read

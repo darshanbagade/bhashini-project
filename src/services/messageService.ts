@@ -11,20 +11,19 @@ import {
   getDocs,
   limit,
   updateDoc,
-  Timestamp
+  Timestamp,
+  addDoc
 } from 'firebase/firestore';
+import { ref, push, get, query, orderByChild, equalTo } from 'firebase/database';
 
 // Types
 export interface Message {
   id: string;
   userId: string;
-  transcriptionText: string | null;
-  translatedText: string | null;
-  audioUrl: string | null;
-  location: { latitude: number; longitude: number } | null;
-  status: 'pending' | 'sent' | 'processed' | 'responded' | 'error';
-  sentAt: Date;
-  lastResponseAt: Date | null;
+  content: string;
+  status: 'pending' | 'in_progress' | 'resolved';
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export interface Response {
